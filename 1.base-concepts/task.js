@@ -15,6 +15,16 @@ function solveEquation(a, b, c) {
 }
 
 function calculateTotalMortgage(percent, contribution, amount, countMonths) {
+  if (
+    isNaN(percent) ||
+    isNaN(contribution) ||
+    isNaN(amount) ||
+    isNaN(countMonths)
+  ) {
+    console.log("Один из параметров содержит неверное значение");
+    return false;
+  }
+
   let percentPerMonth = percent / 100 / 12;
   let creditBody = amount - contribution;
   let payPerMonth =
@@ -23,16 +33,6 @@ function calculateTotalMortgage(percent, contribution, amount, countMonths) {
       percentPerMonth / ((1 + percentPerMonth) ** countMonths - 1));
   let totalTest = payPerMonth * countMonths;
   let result = Number(totalTest.toFixed(2));
-  if (isNaN(percent)) {
-    return (result = `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`);
-  }
-
-  if (isNaN(Number(contribution))) {
-    return (result = `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`);
-  }
-  // if (isNaN(Number(amount))) {
-  //   return (result = `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`);
-  // }
 
   return result;
 }
